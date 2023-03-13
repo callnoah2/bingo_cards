@@ -21,6 +21,41 @@ Deliver:
     *   *Grace Points: if this tag is pushed by midnight on the Sunday before the due date, you will receive up to 5 points back*
 
 
+### Instructions in my own words:
+
+* I need to complete the classes that have been started. These classes include the card, the Deck, Menu, Menu Option, Rand Numbers, Tty colors, user interface, bingo and the run tests.
+* The tty colors does not need to be changed.
+* run Tests only needs to be modified if I want to change it, or if I complete the  project in a different way than the tests are expectin. I can also add any tests I want.
+* part of the menu and the menu Option have been finished from what the c++ have implemented, but it is not finished yet.
+* RandNumberSet has also been worked on by the C++ team, but there is a bug where some numbers will repeat. 
+* a deck will have methods to print a specific bingo card from the deck, to print the entire deck to the screen, and to save the deck to a file supplied by the user.
+* Cards will have their ID number printed, then it will print the name of each column BINGODARLYZEMPUX, columns will be seperated by | and rows will seperated with +-----+. Cards that are 
+odd numbers will have a FREE! space in the middle. 
+* Cards will be created and stored into memory but not printed out unless asked. 
+* The user manual will tell people how to run the program, what menus are there, what responces are acceptable from the menu and how to create a deck and print out the cards, save them to 
+a file, or exit the program. The user manual should also describe error messages the user might see and how to recover
+* I also need to Draw a UML Class Diagram, This Must include each classess, how they relate to other classes, and what each class consists of.
+
+
+### What this program aims to solve:
+
+* This program will create a deck of bingo cards that follow the user's specifications. The user will choose the number of rowsXcolumns, and the range of numbers. Users will be able to 
+print out specific cards or the entire deck. User will also be able to save a deck to a file they create. 
+
+### Data used by the program and where it comes from:
+
+* User will supply what the size of the card should be and the range of numbers found on the card this will come from the first menu. data created by this project will consist of the card 
+ID
+* The output will be in the form of text, The output my be printed by the user or saved in a file.
+
+### Algorithms to be used:
+
+* The functions to create and place all the random numbers is an algorithm that has *mostly* been created already.
+* A small algorithm will be used to print all the cards.
+* Another algorithm will be used to format the cards corectly.
+* an algorithm will be used to ensure the numbers in each column are in the correct range.
+
+
 ## Phase 1: Design (tag name `designed`)
 *(30% of your effort)*
 
