@@ -74,6 +74,67 @@ Deliver:
 *   [ ] Tag the last commit in this phase `designed`
     *   *Grace Points: if this tag is pushed by midnight on the Sunday before the due date, you will receive up to 5 points back*
 
+### Function Signatures:
+
+# Card Class:
+
+* a card consists of its id and the RandNumSet.
+* the card needs to be able to get the ID of any card. 
+* it also needs to remember the size of the card (row X col)
+* it also needs the col names.
+* This class needs to be able to return the value of any row X col so it can be printed.
+* the class needs to return the len of the card, this will be used for printing.
+* This class also needs to be able to return the bingo card as a string. aka print the card to the screen
+
+
+# Deck Class
+
+* the deck needs to know how many cards are in the deck, the card size, and the max number in the cards
+* The deck needs to be able to return an int of how many cards are in the deck
+* the deck needs to be able to return any card from the deck from it's ID
+* the deck needs to be able to return all the cards from the deck and print them
+
+# Menu class
+
+* the menu needs to be colorful
+* the menu will prompt the user for input, and repeat the prompt until it sees a recognized command
+* the menu needs to check input to see if it is valid.
+* it also needs to be able to return the number of menu options in the menu
+* it has a function called getitem that will retrive an option by index, but I dont know what this is used for.
+* this class also has a function called iadd which is used to append an option to the m arrOptionsm
+
+**NOTE** The menu starts as an empty menu, all options are appended to it as needed.
+
+# MenuOpiton Class
+
+**NOTE** this class is used for presenting the options to the menu
+
+* this class has a function called getCommand that will return a string, the command letter that activates an option
+* this calss can also return a description of the menu Option
+* It can also return the command letter and teh description
+
+# RandNumberSet Class
+
+* The min size is 3 and the max is 16!
+* The minimum the numbers can be is the size X size, this is to ensure there are enough possible numbers so none are repeated
+* This class will shuffle the numbers so they are always in a random order
+* this class will return the next row of numbers because all numbers in a row need to be within a certain range.
+* This class can return the segments
+* it can also get the length of numbers aka the card size.
+* It can return a specified row of bingo numbers
+
+# User Interface Class
+
+* this will present the user with the main menu and the deck menu. This can also validate input
+* the first function is to run the class, which will present the user with their menu
+* createDeck will create a new deck based on specifications from the user.
+* this will aslo present the user with a deck menu
+* getStr will return the input from the user
+* getInt will return the input as an int from the user
+* this class can also print a specific card from the deck to the users screen
+* This class can also save the deck to any file
+* this class needs to be able to print the entire deck to the user
+
 
 ## Phase 2: Implementation (tag name `implemented`)
 *(15% of your effort)*
