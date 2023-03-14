@@ -90,8 +90,11 @@ This class is called from the deck class when the user is creating a new deck.
 The parameters will come from the UI.  
 
 getID
+return nID
 
 numberAt(row, col)
+
+
 
 len
 
