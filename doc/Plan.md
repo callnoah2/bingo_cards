@@ -89,6 +89,15 @@ Deliver:
 This class is called from the deck class when the user is creating a new deck.
 The parameters will come from the UI.  
 
+getID
+
+numberAt(row, col)
+
+len
+
+str
+
+
 # Deck Class
 
 * the deck needs to know how many cards are in the deck, the card size, and the max number in the cards
@@ -97,6 +106,12 @@ The parameters will come from the UI.
 * the deck needs to be able to return all the cards from the deck
 
 This class is called from the UI after the user gives the parameters for the deck.
+
+len
+
+getItem
+
+str
 
 
 # Menu class
@@ -110,6 +125,17 @@ This class is called from the UI after the user gives the parameters for the dec
 
 **NOTE** The menu starts as an empty menu, all options are appended to it as needed.
 
+iadd
+
+getitem
+
+len
+
+isValidCommand
+
+prompt
+
+
 # MenuOpiton Class
 
 **NOTE** this class is used for presenting the options to the menu
@@ -117,6 +143,13 @@ This class is called from the UI after the user gives the parameters for the dec
 * this class has a function called getCommand that will return a string, the command letter that activates an option
 * this calss can also return a description of the menu Option
 * It can also return the command letter and teh description
+
+getCommand
+
+getDescription
+
+str
+
 
 # RandNumberSet Class
 
@@ -130,6 +163,18 @@ This class is called from the UI after the user gives the parameters for the dec
 
 this class is called from the card class for filling in the cards with new numbers.
 The parameters come from the UI
+
+shuffle
+
+getNextRow
+
+getSegments
+
+str
+
+len
+
+getitem
 
 
 # User Interface Class
@@ -155,6 +200,22 @@ the number of cards for the deck
 after all info is given, a new deck is created.
 
 then a new menu appears, in this menu, the user can print a card to the screen, print all cards to the screen, save the entire deck to a file, or return to the menu
+
+run
+
+createDeck
+
+deckMenu
+
+getStr
+
+getInt
+
+printCard
+
+printDeck
+
+saveDeck
 
 
 ## Phase 2: Implementation (tag name `implemented`)
