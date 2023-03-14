@@ -84,15 +84,20 @@ Deliver:
 * it also needs the col names.
 * This class needs to be able to return the value of any row X col so it can be printed.
 * the class needs to return the len of the card, this will be used for printing.
-* This class also needs to be able to return the bingo card as a string. aka print the card to the screen
+* This class also needs to be able to return the bingo card as a string
 
+This class is called from the deck class when the user is creating a new deck.
+The parameters will come from the UI.  
 
 # Deck Class
 
 * the deck needs to know how many cards are in the deck, the card size, and the max number in the cards
 * The deck needs to be able to return an int of how many cards are in the deck
 * the deck needs to be able to return any card from the deck from it's ID
-* the deck needs to be able to return all the cards from the deck and print them
+* the deck needs to be able to return all the cards from the deck
+
+This class is called from the UI after the user gives the parameters for the deck.
+
 
 # Menu class
 
@@ -123,6 +128,10 @@ Deliver:
 * it can also get the length of numbers aka the card size.
 * It can return a specified row of bingo numbers
 
+this class is called from the card class for filling in the cards with new numbers.
+The parameters come from the UI
+
+
 # User Interface Class
 
 * this will present the user with the main menu and the deck menu. This can also validate input
@@ -134,6 +143,18 @@ Deliver:
 * this class can also print a specific card from the deck to the users screen
 * This class can also save the deck to any file
 * this class needs to be able to print the entire deck to the user
+
+**NOTE** input is case insensitive
+The main menu allows the user to either create a new deck or exit the program
+when the user selects create a new deck
+the program will propmt the user for the size of the card
+the maximum bingo number
+the number of cards for the deck
+**NOTE** when the menu is prompting the user for parameters of their deck, it should give minimum and maximum values
+
+after all info is given, a new deck is created.
+
+then a new menu appears, in this menu, the user can print a card to the screen, print all cards to the screen, save the entire deck to a file, or return to the menu
 
 
 ## Phase 2: Implementation (tag name `implemented`)
