@@ -93,13 +93,23 @@ getID
 return nID
 
 numberAt(row, col)
-
-
+key = grid[row][col]
+assuming the grid is in a 2d list, we can find the value in the grid by iterating to the correct row and column
 
 len
+len1 = len(grid[0])
+this will find the len of the first row which is the same as the col
 
 str
+For this function, I will iterate through the grid, and print them formatted
+while I am iterating throught the grid, I will also print the boundry lines
 
+print header '+' + '-' * 5 + '+'
+	for row in grid:
+		for cell in row
+			print(f' {number} |' end = '')
+		print()
+print header again
 
 # Deck Class
 
@@ -111,10 +121,14 @@ str
 This class is called from the UI after the user gives the parameters for the deck.
 
 len
+return nNumCards
 
-getItem
+getItem(nIDx)
+return cards[nIDx]
 
 str
+for card in cards
+	card[card].str
 
 
 # Menu class
@@ -128,15 +142,38 @@ str
 
 **NOTE** The menu starts as an empty menu, all options are appended to it as needed.
 
-iadd
+iadd(option)
+Options.append(option)
 
-getitem
+getitem(nIdx)
+if 0 <= nIdx < len(self)
+	return self.Options[nIdx]
 
 len
+return len(Options)
 
-isValidCommand
+isValidCommand(chCommand)
+for i in range(len(self))
+	if Command.upper() == self[i].command.upper()
+		return true
+	return false
 
 prompt
+While True:
+	options = []
+	print header
+	for i in range(len(self))
+		option = self[i]
+		if option is not None:
+			print(option)
+			opptions.append(self(option.getcommand))
+	print(enter a command) (formatted)
+	command = input()
+	if self.isValidCommand(command)
+		return command	
+	else
+		print this is not a valid option
+		call prompt
 
 
 # MenuOpiton Class
@@ -148,10 +185,13 @@ prompt
 * It can also return the command letter and teh description
 
 getCommand
+return self.Command
 
 getDescription
+return self.description
 
 str
+return command + description
 
 
 # RandNumberSet Class
@@ -168,16 +208,38 @@ this class is called from the card class for filling in the cards with new numbe
 The parameters come from the UI
 
 shuffle
+for parts in segments
+	random.shuffle(parts)
+return parts
 
 getNextRow
+if RowPos >= nSize:
+	return none
+row = []
+for seg in segments
+	row.append(seg(nRowPos)
+return row
 
 getSegments
+return arrSegments
 
 str
+strs =[]
+for seg in segments
+strs.append(str(seg))
+return strs
 
 len
+return nSize
 
 getitem
+if 0 <= n < nSize:
+row = []
+for seg in segments
+	row.append(seg[n])
+return row
+else
+Index error
 
 
 # User Interface Class
@@ -205,20 +267,49 @@ after all info is given, a new deck is created.
 then a new menu appears, in this menu, the user can print a card to the screen, print all cards to the screen, save the entire deck to a file, or return to the menu
 
 run
+while true:
+	print logo
+	menu = menu(main)
+	menu += menuOption(Create a new deck)
+	+= exit
+	command = menu.prompt()
+	if command == c
+		create deck
+	elif == x
+		break
 
 createDeck
+size = input("size of card")
+maxNum = input(maxNum)
+number = input(number of cards)
+deckMenu()
 
 deckMenu
+either print a card, display the deck, save the deck, or return to the main menu
+if printing a card
+printCard
+if printing entire deck
+printDeck
+if saving the deck
+savedeck()
 
 getStr
+return user input
 
 getInt
+return user input
 
 printCard
+card[which card].str()
 
 printDeck
+deck.str()
 
 saveDeck
+filename = input(filename)
+with open (filename, 'w') as f
+	printDeck()
+
 
 
 ## Phase 2: Implementation (tag name `implemented`)
