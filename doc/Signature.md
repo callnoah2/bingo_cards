@@ -5,4 +5,6 @@
 | Date        | Time Spent | Events
 |-------------|------------|--------------------
 |  March 13   |  2.5 hours | Read through all documentation, finished phase 0
-| TOTAL       |  2.5 hours | *Your TOTAL should agree with your daily entries*
+|  March 14   |   3 hours  | Finished phase 1
+|  March 15   |   0 hours  | Finished Implementation Phase 2
+| TOTAL       |  5.5 hours | *Your TOTAL should agree with your daily entries*

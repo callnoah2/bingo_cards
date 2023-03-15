@@ -22,10 +22,11 @@
 
 from math import floor  	  	  
 
-from Deck import Deck  	  	  
+from Deck import Deck
 from Menu import Menu  	  	  
 from MenuOption import MenuOption  	  	  
-from TtyColors import TtyColors  	  	  
+from TtyColors import TtyColors
+from Card import Card
 
 
 class UserInterface(TtyColors):  	  	  
@@ -75,13 +76,16 @@ class UserInterface(TtyColors):
         The Deck is stored in self.__m_deck  	  	  
         """  	  	  
         print("TODO: Walk the user through these prompts in this order:")  	  	  
-        print("TODO:  * prompt for the size of card")  	  	  
-        print("TODO:  * prompt for the maximum Bingo number to use on each card")  	  	  
-        print("TODO:  * prompt for the number of cards in the deck")  	  	  
+        print("TODO:  * prompt for the size of card")
+        Dimentions = int(input("Please Enter the Size of the Card: "))
+        print("TODO:  * prompt for the maximum Bingo number to use on each card")
+        MaxNum = int(input("Please Enter the max Bingo number(min:): "))
+        print("TODO:  * prompt for the number of cards in the deck")
+        numCard = int(input("Please enter the number of Cards to be created: "))
         print("TODO: create the new Deck object")  	  	  
-        self.__deckMenu()  	  	  
+        self.__deckMenu()
 
-    def __deckMenu(self):  	  	  
+    def __deckMenu(self):
         """  	  	  
         Return None  	  	  
 
@@ -124,19 +128,25 @@ class UserInterface(TtyColors):
         """  	  	  
         raise NotImplementedError("TODO: Return a validated integer input by user")  	  	  
 
+    def __printDeck(self):
+        Deck.__str__()
 
-    def __printCard(self):  	  	  
+    def __printCard(self):
         """  	  	  
         Return None: Print one Card from the Deck  	  	  
 
         Prompt user for a Card ID  	  	  
-        """  	  	  
-        raise NotImplementedError("TODO: Print one Card from the Deck")  	  	  
+        """
+        printCard = int(input("Which Card: "))
+        Card.__str__(Card[printCard])
+        raise NotImplementedError("TODO: Print one Card from the Deck")
 
     def __saveDeck(self):  	  	  
         """  	  	  
         Return None: Save a Deck to a file  	  	  
 
         Prompt user for the name of file to write the entire Deck into  	  	  
-        """  	  	  
+        """
+        fileName = input("Please enter a filename: ")
+
         raise NotImplementedError("TODO: Save a Deck to a file")  	  	  
