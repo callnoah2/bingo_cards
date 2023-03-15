@@ -21,6 +21,7 @@ Deliver:
     *   *Grace Points: if this tag is pushed by midnight on the Sunday before the due date, you will receive up to 5 points back*
 
 
+
 ### Instructions in my own words:
 
 * I need to complete the classes that have been started. These classes include the card, the Deck, Menu, Menu Option, Rand Numbers, Tty colors, user interface, bingo and the run tests.
