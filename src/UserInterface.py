@@ -132,27 +132,29 @@ class UserInterface(TtyColors):
             return
 
     def __printDeck(self):
-        print(Deck)
+        """
+           Print the entire deck of cards to the screen.
+           """
+        if not self.__m_deck:
+            print(self.red("No deck has been created yet."))
+        else:
+            for i, card in enumerate(self.__m_deck):
+                print(card)
 
     def __printCard(self, nNumCards, nCardSize):
-        # card_id = input("Enter the ID of the card to print: ")
-        #
-        # # Find the card in the list of cards
-        # card = None
-        # for c in self.cards:
-        #     if c.getID() == card_id:
-        #         card = c
-        #         break
-        #
-        # # If card is not found, print error message and return
-        # if not card:
-        #     print("Card not found!")
-        #     return
+        """
+           Print a single card from the deck to the console
+           """
+        if self.__m_deck is None:
+            print("No deck created yet.")
+            return
 
+        card_number = self.__getInt(f"Enter the card number to print (1-{nNumCards}): ", 1, nNumCards)
 
-        ID = int(input("Card ID: "))
-        # Print the card
-        print(Card.__str__(Card, ID, nCardSize))
+        # The deck is 0-indexed, so we need to subtract 1 from the card number to get the correct index
+        card_index = card_number - 1
+        card = self.__m_deck[card_index]
+        print(card)
 
     def __saveDeck(self):
         """  	  	  

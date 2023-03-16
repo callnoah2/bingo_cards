@@ -18,9 +18,7 @@
 #       notices from the Source form of the Work; and  	  	  
 #   (d) You do not misuse the trade names, trademarks, service marks,  	  	  
 #       or product names of the Licensor, except as required for  	  	  
-#       reasonable and customary use of the source files.  	  	  
-
-import random
+#       reasonable and customary use of the source files.
 
 class Card():
     COLUMN_NAMES = list("BINGOLARDYPEZMUX")
@@ -39,17 +37,18 @@ class Card():
         return self.numbers[nCol][nRow]
 
     def __len__(self):
-        len(self.numbers)
+        return len(self.numbers)
 
-    def __str__(self, nID, nCardSize):
+    def __str__(self):
         # Get the size of the card
-        size = nCardSize
+        size = len(self)
 
         # Create the header row with column names
-        header = "Card #{}\n  ".format(nID)
+        header = "Card #{}\n".format(self.id + 1)
+        col_width = 5  # Width of the number cells
         for column in self.COLUMN_NAMES[:size]:
-            header += "{:^5}".format(column)
-        header += "\n"
+            header += "|{:^{}}".format(column, col_width)  # Center the column name within the cell
+        header += "|\n"
 
         # Create the separator row
         separator = "+-----" * size + "+\n"
@@ -59,14 +58,13 @@ class Card():
         for row in range(size):
             row_str = "|"
             for col in range(size):
-                print(self.numberAt(row, col))
                 value = self.numberAt(row, col)
                 if value == -1:
                     value_str = "FREE!"
                 else:
                     value_str = str(value).center(5)
                 row_str += value_str + "|"
-            rows += row_str + "\n"
+            rows += row_str + "\n" + separator
 
         # Combine everything into the final string
-        return header + separator + rows + separator
+        return header + separator + rows
