@@ -20,120 +20,226 @@
 #       or product names of the Licensor, except as required for  	  	  
 #       reasonable and customary use of the source files.  	  	  
 
-import random  	  	  
+# import random
+#
+# class RandNumberSet():
+#     MIN_SIZE = 3
+#     MAX_SIZE = 16
+#
+#     def __init__(self, nSize, nMax):
+#         """
+#         Create a RandNumberSet
+#
+#         'nSize': a parameter restricted to be in the range [3..16]
+#         'nMax': a parameter restricted to be no less than `nSize*nSize`
+#
+#         Numbers are kept in separate segments so that the numbers within
+#         columns on the resulting Bingo! card increase from left to right.
+#
+#         Within a column numbers are unordered.
+#
+#         A newly initialized RandNumberSet may present its numbers in
+#         order.  Use .shuffle() to mix it up.
+#         """
+#         self.__m_nRowPos = 0
+#
+#         # __m_nSize must be between [MIN_SIZE..MAX_SIZE]
+#         self.__m_nSize = nSize
+#         if self.__m_nSize < RandNumberSet.MIN_SIZE:
+#             self.__m_nSize = RandNumberSet.MIN_SIZE
+#         elif self.__m_nSize > RandNumberSet.MAX_SIZE:
+#             self.__m_nSize = RandNumberSet.MAX_SIZE
+#
+#         # __m_nMax must be at least __m_nSize^2
+#         self.__m_nMax = nMax
+#         if self.__m_nMax < self.__m_nSize * self.__m_nSize:
+#             self.__m_nMax = self.__m_nSize * self.__m_nSize
+#
+#         self.__m_arrSegments = []
+#         segmentSize = self.__m_nMax // self.__m_nSize
+#         remainder = self.__m_nMax % self.__m_nSize
+#         low = 1
+#         for segment in range(1, self.__m_nSize + 1):
+#             high = low + segmentSize
+#             if segment <= remainder:
+#                 high += 1
+#             segment_numbers = set(range(low, high + 1))
+#             row = []
+#             while len(row) < self.__m_nSize:
+#                 num = random.randint(low, high)
+#                 if num in segment_numbers:
+#                     row.append(num)
+#                     segment_numbers.remove(num)
+#             self.__m_arrSegments.append(row)
+#             low = high
+#
+#     def shuffle(self):
+#         """
+#         Shuffle each segment and reset the current row position so that
+#         getNextRow() will start from the top again.
+#         """
+#         for seg in self.__m_arrSegments:
+#             random.shuffle(seg)
+#         self.__m_nRowPos = 0
+#
+#     def getNextRow(self):
+#         """
+#         Return the next row of Bingo numbers, or None if the RandNumberSet
+#         is exhausted.
+#
+#         This method automatically keeps track of which row is up next
+#         """
+#         if self.__m_nRowPos >= self.__m_nSize:
+#             return None
+#         row = self.__m_arrSegments[self.__m_nRowPos]
+#         self.__m_nRowPos += 1
+#         return row
+#
+#     def getSegments(self):
+#         """
+#         Accessor to private member __m_arrSegments
+#         """
+#         return self.__m_arrSegments
+#
+#     def __str__(self):
+#         """
+#         Return a string representing the RandNumberSet
+#         """
+#         strs = []
+#         for seg in self.__m_arrSegments:
+#             strs.append(str(seg))
+#         return '\n'.join(strs)
+#
+#     def __len__(self):
+#         """
+#         This dunder makes `len()` work on RandNumberSets
+#
+#         The length of a RandNumberSet is equal to the number of segments
+#         it contains; in other words, len(RandNumberSet) == card size.
+#
+#         """
+#         # BUG FIX: Return the total number of unique numbers in the RandNumberSet
+#         return self.__m_nSize * len(self.__m_arrSegments[0])
+#
+#     def __getitem__(self, n):
+#         """
+#         Return the specified row of Bingo numbers, raise IndexError when out-of-bounds
+#         """
+#         if 0 <= n < self.__m_nSize:
+#             row = []
+#             for seg in self.__m_arrSegments:
+#                 row.append(seg[n])
+#             return row
+#         else:
+#             raise IndexError
+import random
 
+class RandNumberSet():
+    MIN_SIZE = 3
+    MAX_SIZE = 16
 
+    def __init__(self, nSize, nMax):
+        """
+        Create a RandNumberSet
 
-class RandNumberSet():  	  	  
-    MIN_SIZE = 3  	  	  
-    MAX_SIZE = 16  	  	  
+        'nSize': a parameter restricted to be in the range [3..16]
+        'nMax': a parameter restricted to be no less than `nSize*nSize`
 
-    def __init__(self, nSize, nMax):  	  	  
-        """  	  	  
-        Create a RandNumberSet  	  	  
+        Numbers are kept in separate segments so that the numbers within
+        columns on the resulting Bingo! card increase from left to right.
 
-        'nSize': a parameter restricted to be in the range [3..16]  	  	  
-        'nMax': a parameter restricted to be no less than `nSize*nSize`  	  	  
+        Within a column numbers are unordered.
 
-        Numbers are kept in separate segments so that the numbers within  	  	  
-        columns on the resulting Bingo! card increase from left to right.  	  	  
+        A newly initialized RandNumberSet may present its numbers in
+        order.  Use .shuffle() to mix it up.
+        """
+        self.__m_nRowPos = 0
 
-        Within a column numbers are unordered.  	  	  
+        # __m_nSize must be between [MIN_SIZE..MAX_SIZE]
+        self.__m_nSize = nSize
+        if self.__m_nSize < RandNumberSet.MIN_SIZE:
+            self.__m_nSize = RandNumberSet.MIN_SIZE
+        elif self.__m_nSize > RandNumberSet.MAX_SIZE:
+            self.__m_nSize = RandNumberSet.MAX_SIZE
 
-        A newly initialized RandNumberSet may present its numbers in  	  	  
-        order.  Use .shuffle() to mix it up.  	  	  
-        """  	  	  
-        self.__m_nRowPos = 0  	  	  
+        # __m_nMax must be at least __m_nSize^2
+        if nMax < self.__m_nSize * self.__m_nSize:
+            raise ValueError("nMax must be at least nSize^2")
+        self.__m_nMax = nMax
 
-        # __m_nSize must be between [MIN_SIZE..MAX_SIZE]  	  	  
-        self.__m_nSize = nSize  	  	  
-        if self.__m_nSize < RandNumberSet.MIN_SIZE:  	  	  
-            self.__m_nSize = RandNumberSet.MIN_SIZE  	  	  
-        elif self.__m_nSize > RandNumberSet.MAX_SIZE:  	  	  
-            self.__m_nSize = RandNumberSet.MAX_SIZE  	  	  
+        self.__m_arrSegments = []
+        segmentSize = self.__m_nMax // self.__m_nSize
+        remainder = self.__m_nMax % self.__m_nSize
+        low = 1
+        for segment in range(1, self.__m_nSize + 1):
+            high = low + segmentSize
+            if segment <= remainder:
+                high += 1
+            segment_numbers = set(range(low, high + 1))
+            row = []
+            while len(row) < self.__m_nSize:
+                num = random.randint(low, high)
+                if num in segment_numbers:
+                    row.append(num)
+                    segment_numbers.remove(num)
+            self.__m_arrSegments.append(row)
+            low = high
 
-        # __m_nMax must be at least __m_nSize^2  	  	  
-        self.__m_nMax = nMax  	  	  
-        if self.__m_nMax < self.__m_nSize * self.__m_nSize:  	  	  
-            self.__m_nMax = self.__m_nSize * self.__m_nSize  	  	  
+    def shuffle(self):
+        """
+        Shuffle each segment and reset the current row position so that
+        getNextRow() will start from the top again.
+        """
+        for seg in self.__m_arrSegments:
+            random.shuffle(seg)
+        self.__m_nRowPos = 0
 
-        self.__m_arrSegments = []  	  	  
-        segmentSize = self.__m_nMax // self.__m_nSize  # n.b. `//` operator means "integer division"  	  	  
-        remainder = self.__m_nMax % self.__m_nSize  	  	  
-        low = 1  	  	  
-        for segment in range(1, self.__m_nSize + 1):  	  	  
-            high = low + segmentSize  	  	  
-            # When `len(RandNumberSet)` is not evenly divisible by `nSize`,  	  	  
-            # there will be some numbers left over.  Distribute these extra  	  	  
-            # numbers starting from segment #0, going up from there  	  	  
-            if segment <= remainder:  	  	  
-                high += 1  	  	  
-            # XXX: I can never remember; is the endpoint of `range()` included or excluded?  	  	  
-            self.__m_arrSegments.append(list(range(low, high + 1)))  	  	  
-            low = high  	  	  
+    def getNextRow(self):
+        """
+        Return the next row of Bingo numbers, or None if the RandNumberSet
+        is exhausted.
 
-    def shuffle(self):  	  	  
-        """  	  	  
-        Shuffle each segment and reset the current row position so that  	  	  
-        getNextRow() will start from the top again.  	  	  
-        """  	  	  
-        for seg in self.__m_arrSegments:  	  	  
-            random.shuffle(seg)  	  	  
-        self.__m_nRowPos = 0  	  	  
+        This method automatically keeps track of which row is up next
+        """
+        if self.__m_nRowPos >= self.__m_nSize:
+            return None
+        row = self.__m_arrSegments[self.__m_nRowPos]
+        self.__m_nRowPos += 1
+        return row
 
-    def getNextRow(self):  	  	  
-        """  	  	  
-        Return the next row of Bingo numbers, or None if the RandNumberSet  	  	  
-        is exhausted.  	  	  
+    def getSegments(self):
+        """
+        Accessor to private member __m_arrSegments
+        """
+        return self.__m_arrSegments
 
-        This method automatically keeps track of which row is up next  	  	  
-        """  	  	  
-        if self.__m_nRowPos >= self.__m_nSize:  	  	  
-            return None  	  	  
-        row = []  	  	  
-        for seg in self.__m_arrSegments:  	  	  
-            row.append(seg[self.__m_nRowPos])  	  	  
-        self.__m_nRowPos += 1  	  	  
-        return row  	  	  
+    def __str__(self):
+        """
+        Return a string representing the RandNumberSet
+        """
+        strs = []
+        for seg in self.__m_arrSegments:
+            strs.append(str(seg))
+        return '\n'.join(strs)
 
-    def getSegments(self):  	  	  
-        """  	  	  
-        Accessor to private member __m_arrSegments  	  	  
-        """  	  	  
-        return self.__m_arrSegments  	  	  
+    def __len__(self):
+        """
+        This dunder makes `len()` work on RandNumberSets
 
-    def __str__(self):  	  	  
-        """  	  	  
-        Return a string representing the RandNumberSet  	  	  
+        The length of a RandNumberSet is equal to the number of segments
+        it contains; in other words, len(RandNumberSet) == card size.
+        """
+        # Return the total number of unique numbers in the RandNumberSet
+        return self.__m_nSize * len(self.__m_arrSegments[0]) * len(self.__m_arrSegments)
 
-        This is basically equivalent to the `operator<<` method in the C++ version  	  	  
-        """  	  	  
-        strs = []  	  	  
-        for seg in self.__m_arrSegments:  	  	  
-            strs.append(str(seg))  	  	  
-        return '\n'.join(strs)  	  	  
-
-    def __len__(self):  	  	  
-        """  	  	  
-        This dunder makes `len()` work on RandNumberSets  	  	  
-
-        The length of a RandNumberSet is equal to the number of segments  	  	  
-        it contains; in other words, len(RandNumberSet) == card size.  	  	  
-
-        This method was called `size` in the C++ version, and was meant to be explicitly called  	  	  
-        """  	  	  
-        return self.__m_nSize  	  	  
-
-    def __getitem__(self, n):  	  	  
-        """  	  	  
-        Return the specified row of Bingo numbers, raise IndexError when out-of-bounds  	  	  
-
-        This method was called `operator[]` in the C++ version  	  	  
-        """  	  	  
-        if 0 <= n < self.__m_nSize:  	  	  
-            row = []  	  	  
-            for seg in self.__m_arrSegments:  	  	  
-                row.append(seg[n])  	  	  
-            return row  	  	  
-        else:  	  	  
-            raise IndexError  	  	  
+    def __getitem__(self, n):
+        """
+        Return the specified row of Bingo numbers, raise IndexError when out-of-bounds
+        """
+        if 0 <= n < self.__m_nSize:
+            row = []
+            for seg in self.__m_arrSegments:
+                row.append(seg[n])
+            return row
+        else:
+            raise IndexError("Index out of range")

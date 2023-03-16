@@ -20,8 +20,6 @@
 #       or product names of the Licensor, except as required for  	  	  
 #       reasonable and customary use of the source files.  	  	  
 
-from math import floor  	  	  
-
 from Deck import Deck
 from Menu import Menu  	  	  
 from MenuOption import MenuOption  	  	  
@@ -38,27 +36,39 @@ class UserInterface(TtyColors):
     Inherit from class TtyColors to gain access to the color methods  	  	  
     """  	  	  
 
-    def __init__(self):  	  	  
-        self.__m_deck = None  	  	  
+    def __init__(self):
+        self.__m_deck = None
 
-    def run(self):  	  	  
-        """  	  	  
-        Return None: present the main menu to the user  	  	  
+    def __getStr(self, prompt, valid_inputs):
+        """
+        Return a string input from the user that is contained in valid_inputs, prompted by string prompt.
+        """
+        while True:
+            response = input(prompt).strip().lower()
+            if response in valid_inputs:
+                return response
+            print(f"Invalid input! Please enter one of the following: {', '.join(valid_inputs)}")
 
-        Repeatedly prompt for a valid command until good input is given, or the program is exited  	  	  
-        """  	  	  
-        while True:  	  	  
-            self.__logo()  	  	  
-            menu = Menu("Main")  	  	  
-            menu += MenuOption("C", "Create a new deck")  	  	  
-            menu += MenuOption("X", "Exit the program")  	  	  
-            command = menu.prompt()  	  	  
-            if command.upper() == "C":  	  	  
-                self.__createDeck()  	  	  
-            elif command.upper() == "X":  	  	  
-                break  	  	  
+    def run(self):
+        """
+        Return None: present the main menu to the user
 
-    def __logo(self):  	  	  
+        Repeatedly prompt for a valid command until good input is given, or the program is exited
+        """
+        while True:
+            self.__logo()
+            menu = Menu("Main")
+            menu += MenuOption("C", "Create a new deck")
+            menu += MenuOption("X", "Exit the program")
+            # command = self.__getStr(menu.prompt(), ["c", "x"])
+            command = str(menu.prompt())
+            if command == "c":
+                self.__createDeck()
+            elif command == "x":
+                break
+
+
+    def __logo(self):
         print()  	  	  
         print(self.green("     ######## "), self.magenta("  ####"), self.blue("  ##    ##"), self.yellow("   ######  "), self.red("   ####### "), self.cyan("  ####"), sep="")  	  	  
         print(self.green("     ##     ##"), self.magenta("   ## "), self.blue("  ###   ##"), self.yellow("  ##    ## "), self.red("  ##     ##"), self.cyan("  ####"), sep="")  	  	  
@@ -67,79 +77,79 @@ class UserInterface(TtyColors):
         print(self.green("     ##     ##"), self.magenta("   ## "), self.blue("  ##  ####"), self.yellow("  ##    ## "), self.red("  ##     ##"), sep="")  	  	  
         print(self.green("     ##     ##"), self.magenta("   ## "), self.blue("  ##   ###"), self.yellow("  ##    ## "), self.red("  ##     ##"), self.cyan("  ####"), sep="")  	  	  
         print(self.green("     ######## "), self.magenta("  ####"), self.blue("  ##    ##"), self.yellow("   ######  "), self.red("   ####### "), self.cyan("  ####"), sep="")  	  	  
-        print("                                         by ", self.yellow("DuckieCorp"), "(tm)", sep="")  	  	  
+        print("                                         by ", self.yellow("DuckieCorp"), "(tm)", sep="")
 
-    def __createDeck(self):  	  	  
-        """  	  	  
-        Return None: Create a new Deck  	  	  
+    def __createDeck(self):
 
-        The Deck is stored in self.__m_deck  	  	  
-        """  	  	  
-        print("TODO: Walk the user through these prompts in this order:")  	  	  
-        print("TODO:  * prompt for the size of card")
-        Dimentions = int(input("Please Enter the Size of the Card: "))
-        print("TODO:  * prompt for the maximum Bingo number to use on each card")
-        MaxNum = int(input("Please Enter the max Bingo number(min:): "))
-        print("TODO:  * prompt for the number of cards in the deck")
-        numCard = int(input("Please enter the number of Cards to be created: "))
-        print("TODO: create the new Deck object")  	  	  
+        # Prompt for the size of card
+        nCardSize = self.__getInt("Please Enter the Size of the Card in range [3 - 16]: ", 3, 16)
+
+        # Prompt for the maximum Bingo number to use on each card
+        minNum = 2 * nCardSize ** 2
+        maxNum = (3.9 * nCardSize ** 2) // 1
+        nMaxNum = self.__getInt(f"Please Enter the max Bingo number(min: {minNum} - max: {maxNum}): ", minNum, maxNum)
+
+        # Prompt for the number of cards in the deck
+        nNumCards = self.__getInt("Please enter the number of Cards to be created: ", 1, float("inf"))
+
+        # Create a new Deck object with the user input values
+        self.__m_deck = Deck(nCardSize, nNumCards, nMaxNum)
         self.__deckMenu()
+
+    def __getInt(self, prompt, lo, hi):
+        """
+        Return an integer value between lo and hi inclusive, prompted by string prompt.
+        """
+        while True:
+            try:
+                num = int(input(prompt))
+                if lo <= num <= hi:
+                    return num
+            except ValueError:
+                pass
+            print(f"Invalid input! Please enter an integer between {lo} and {hi}.")
 
     def __deckMenu(self):
         """  	  	  
         Return None  	  	  
 
         Present the deck menu to user until a valid selection is chosen  	  	  
-        """  	  	  
-        menu = Menu("Deck")  	  	  
-        menu += MenuOption("P", "Print a card to the screen")  	  	  
-        menu += MenuOption("D", "Display the whole deck to the screen")  	  	  
-        menu += MenuOption("S", "Save the whole deck to a file")  	  	  
-        menu += MenuOption("X", "Return to the Main menu")  	  	  
-
-        while True:  	  	  
-            command = menu.prompt()  	  	  
-            if command.upper() == "P":  	  	  
-                self.__printCard()  	  	  
-            elif command.upper() == "D":  	  	  
-                print("TODO: Print the Deck to the screen")  	  	  
-                print(self.__m_deck)  	  	  
-            elif command.upper() == "S":  	  	  
-                self.__saveDeck()  	  	  
-            elif command.upper() == "X":  	  	  
-                break  	  	  
-
-    def __getStr(self, prompt):  	  	  
-        """  	  	  
-        Return a string: non-empty input entered by the user  	  	  
-
-        Take a prompt string as input  	  	  
-        Repeat the prompt until a non-empty string is provided  	  	  
-        """  	  	  
-        raise NotImplementedError("TODO: Return a non-empty string entered by the user")  	  	  
-
-
-    def __getInt(self, prompt, lo, hi):  	  	  
-        """  	  	  
-        Return an integer: validated integer input by user  	  	  
-
-        Take a prompt string, low and high integers as input  	  	  
-        Repeat the prompt until an integer that is in-range is provided  	  	  
-        """  	  	  
-        raise NotImplementedError("TODO: Return a validated integer input by user")  	  	  
+        """
+        menu = Menu("Deck")
+        menu += MenuOption("P", "Print a card to the screen")
+        menu += MenuOption("D", "Display the whole deck to the screen")
+        menu += MenuOption("S", "Shuffle the deck")
+        menu += MenuOption("X", "Return to main menu")
+        command = self.__getStr(menu.prompt(), ["p", "d", "s", "x"])
+        if command == "p":
+            self.__printCard()
+        elif command == "d":
+            self.__printDeck()
+        elif command == "s":
+            self.__saveDeck()
+        elif command == "x":
+            return
 
     def __printDeck(self):
-        Deck.__str__()
+        print(Deck)
 
     def __printCard(self):
-        """  	  	  
-        Return None: Print one Card from the Deck  	  	  
+        card_id = input("Enter the ID of the card to print: ")
 
-        Prompt user for a Card ID  	  	  
-        """
-        printCard = int(input("Which Card: "))
-        Card.__str__(Card[printCard])
-        raise NotImplementedError("TODO: Print one Card from the Deck")
+        # Find the card in the list of cards
+        card = None
+        for c in self.cards:
+            if c.getID() == card_id:
+                card = c
+                break
+
+        # If card is not found, print error message and return
+        if not card:
+            print("Card not found!")
+            return
+
+        # Print the card
+        print(card)
 
     def __saveDeck(self):  	  	  
         """  	  	  

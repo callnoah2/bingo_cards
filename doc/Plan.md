@@ -325,6 +325,10 @@ Deliver:
     *   e.g. things you learned, things that didn't go according to plan
 *   [ ] Tag the last commit in this phase `implemented`
 
+### Problems: 
+I am getting an index error when I am trying to add the numbers to the card. I cannot figure it out.
+
+
 
 ## Phase 3: Testing and Debugging (tag name `tested`)
 *(30% of your effort)*

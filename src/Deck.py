@@ -21,36 +21,29 @@
 #       reasonable and customary use of the source files.  	  	  
 
 from Card import Card  	  	  
-from RandNumberSet import RandNumberSet  	  	  
+from RandNumberSet import RandNumberSet
 
+class Deck():
+    def __init__(self, nCardSize, nNumCards, nMaxNum):
+        self.__m_cards = []
+        self.__m_size = nCardSize
+        self.__m_max_num = nNumCards
+        self.__m_num_cards = nMaxNum
 
-class Deck():  	  	  
-    def __init__(self, nCardSize, nNumCards, nMaxNum):  	  	  
-        """  	  	  
-        Deck constructor  	  	  
-        """  	  	  
-        pass  	  	  
+        rand_num_set = RandNumberSet(nCardSize, nMaxNum)
+        for i in range(nNumCards):
+            card = Card(nCardSize, rand_num_set[i])
+            self.__m_cards.append(card)
 
-    def __len__(self):  	  	  
-        """  	  	  
-        Return an integer: the number of cards in this deck  	  	  
+    def __len__(self):
+        return len(self.__m_cards)
 
-        This method was called `getSize` in the C++ version  	  	  
-        """  	  	  
-        pass  	  	  
+    def __getitem__(self, nIdx):
+        return self.__m_cards[nIdx]
 
-    def __getitem__(self, nIdx):  	  	  
-        """  	  	  
-        Return Card N from the Deck  	  	  
-
-        This method was called `operator[]` in the C++ version  	  	  
-        """  	  	  
-        pass  	  	  
-
-    def __str__(self):  	  	  
-        """  	  	  
-        Return a string: return the entire Deck as a string  	  	  
-
-        This is basically equivalent to the `operator<<` method in the C++ version  	  	  
-        """  	  	  
-        pass  	  	  
+    def __str__(self):
+        outpt = ""
+        for card in self.__m_cards:
+            outpt += str(card)
+            outpt += "\n"
+        return outpt

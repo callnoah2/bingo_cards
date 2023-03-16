@@ -79,7 +79,7 @@ class Menu(TtyColors):
         Considers upper-case options the same as lower-case  	  	  
         """  	  	  
         for i in range(len(self)):  	  	  
-            if chCommand.upper() == self[i].getCommand().upper():  	  	  
+            if chCommand.lower() == self[i].getCommand().lower():
                 return True  	  	  
         return False  	  	  
 
