@@ -7,4 +7,5 @@
 |  March 13   |  2.5 hours | Read through all documentation, finished phase 0
 |  March 14   |   3 hours  | Finished phase 1
 |  March 15   |   5 hours  | worked on implementation
-| TOTAL       | 10.5 hours | *Your TOTAL should agree with your daily entries*
+|  March 16   |   1 hour   | worked on implementation
+| TOTAL       | 11.5 hours | *Your TOTAL should agree with your daily entries*

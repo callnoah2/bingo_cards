@@ -327,7 +327,10 @@ Deliver:
 
 ### Problems: 
 I am getting an index error when I am trying to add the numbers to the card. I cannot figure it out.
+* The issue was caused beacuse I was iterating with the wrong variable.
+I am getting a new error when I try to print the card, I have seen a few different error messages as I have made changes, Nothing has worked so far.
 
+I also have to input things twice for some reason. I think it is because I am validating the users responce two times.
 
 
 ## Phase 3: Testing and Debugging (tag name `tested`)

@@ -21,23 +21,24 @@
 #       reasonable and customary use of the source files.  	  	  
 
 from Deck import Deck
-from Menu import Menu  	  	  
-from MenuOption import MenuOption  	  	  
+from Menu import Menu
+from MenuOption import MenuOption
 from TtyColors import TtyColors
 from Card import Card
 
 
-class UserInterface(TtyColors):  	  	  
+class UserInterface(TtyColors):
     """  	  	  
     Provide the UserInterface for the program, which consists of the Main menu and the Deck menu  	  	  
 
     Also provides methods for accepting and validating user input  	  	  
 
     Inherit from class TtyColors to gain access to the color methods  	  	  
-    """  	  	  
+    """
 
     def __init__(self):
         self.__m_deck = None
+
 
     def __getStr(self, prompt, valid_inputs):
         """
@@ -69,14 +70,14 @@ class UserInterface(TtyColors):
 
 
     def __logo(self):
-        print()  	  	  
-        print(self.green("     ######## "), self.magenta("  ####"), self.blue("  ##    ##"), self.yellow("   ######  "), self.red("   ####### "), self.cyan("  ####"), sep="")  	  	  
-        print(self.green("     ##     ##"), self.magenta("   ## "), self.blue("  ###   ##"), self.yellow("  ##    ## "), self.red("  ##     ##"), self.cyan("  ####"), sep="")  	  	  
-        print(self.green("     ##     ##"), self.magenta("   ## "), self.blue("  ####  ##"), self.yellow("  ##       "), self.red("  ##     ##"), self.cyan("  ####"), sep="")  	  	  
-        print(self.green("     ######## "), self.magenta("   ## "), self.blue("  ## ## ##"), self.yellow("  ##   ####"), self.red("  ##     ##"), self.cyan("   ##"), sep="")  	  	  
-        print(self.green("     ##     ##"), self.magenta("   ## "), self.blue("  ##  ####"), self.yellow("  ##    ## "), self.red("  ##     ##"), sep="")  	  	  
-        print(self.green("     ##     ##"), self.magenta("   ## "), self.blue("  ##   ###"), self.yellow("  ##    ## "), self.red("  ##     ##"), self.cyan("  ####"), sep="")  	  	  
-        print(self.green("     ######## "), self.magenta("  ####"), self.blue("  ##    ##"), self.yellow("   ######  "), self.red("   ####### "), self.cyan("  ####"), sep="")  	  	  
+        print()
+        print(self.green("     ######## "), self.magenta("  ####"), self.blue("  ##    ##"), self.yellow("   ######  "), self.red("   ####### "), self.cyan("  ####"), sep="")
+        print(self.green("     ##     ##"), self.magenta("   ## "), self.blue("  ###   ##"), self.yellow("  ##    ## "), self.red("  ##     ##"), self.cyan("  ####"), sep="")
+        print(self.green("     ##     ##"), self.magenta("   ## "), self.blue("  ####  ##"), self.yellow("  ##       "), self.red("  ##     ##"), self.cyan("  ####"), sep="")
+        print(self.green("     ######## "), self.magenta("   ## "), self.blue("  ## ## ##"), self.yellow("  ##   ####"), self.red("  ##     ##"), self.cyan("   ##"), sep="")
+        print(self.green("     ##     ##"), self.magenta("   ## "), self.blue("  ##  ####"), self.yellow("  ##    ## "), self.red("  ##     ##"), sep="")
+        print(self.green("     ##     ##"), self.magenta("   ## "), self.blue("  ##   ###"), self.yellow("  ##    ## "), self.red("  ##     ##"), self.cyan("  ####"), sep="")
+        print(self.green("     ######## "), self.magenta("  ####"), self.blue("  ##    ##"), self.yellow("   ######  "), self.red("   ####### "), self.cyan("  ####"), sep="")
         print("                                         by ", self.yellow("DuckieCorp"), "(tm)", sep="")
 
     def __createDeck(self):
@@ -94,7 +95,7 @@ class UserInterface(TtyColors):
 
         # Create a new Deck object with the user input values
         self.__m_deck = Deck(nCardSize, nNumCards, nMaxNum)
-        self.__deckMenu()
+        self.__deckMenu(nNumCards, nCardSize)
 
     def __getInt(self, prompt, lo, hi):
         """
@@ -109,11 +110,11 @@ class UserInterface(TtyColors):
                 pass
             print(f"Invalid input! Please enter an integer between {lo} and {hi}.")
 
-    def __deckMenu(self):
-        """  	  	  
-        Return None  	  	  
+    def __deckMenu(self, nNumCards, nCardSize):
+        """
+        Return None
 
-        Present the deck menu to user until a valid selection is chosen  	  	  
+        Present the deck menu to user until a valid selection is chosen
         """
         menu = Menu("Deck")
         menu += MenuOption("P", "Print a card to the screen")
@@ -122,7 +123,7 @@ class UserInterface(TtyColors):
         menu += MenuOption("X", "Return to main menu")
         command = self.__getStr(menu.prompt(), ["p", "d", "s", "x"])
         if command == "p":
-            self.__printCard()
+            self.__printCard(nNumCards, nCardSize)
         elif command == "d":
             self.__printDeck()
         elif command == "s":
@@ -133,25 +134,27 @@ class UserInterface(TtyColors):
     def __printDeck(self):
         print(Deck)
 
-    def __printCard(self):
-        card_id = input("Enter the ID of the card to print: ")
+    def __printCard(self, nNumCards, nCardSize):
+        # card_id = input("Enter the ID of the card to print: ")
+        #
+        # # Find the card in the list of cards
+        # card = None
+        # for c in self.cards:
+        #     if c.getID() == card_id:
+        #         card = c
+        #         break
+        #
+        # # If card is not found, print error message and return
+        # if not card:
+        #     print("Card not found!")
+        #     return
 
-        # Find the card in the list of cards
-        card = None
-        for c in self.cards:
-            if c.getID() == card_id:
-                card = c
-                break
 
-        # If card is not found, print error message and return
-        if not card:
-            print("Card not found!")
-            return
-
+        ID = self.__getInt(input("Card ID: "), 1, nNumCards)
         # Print the card
-        print(card)
+        print(Card.__str__(Card, ID, nCardSize))
 
-    def __saveDeck(self):  	  	  
+    def __saveDeck(self):
         """  	  	  
         Return None: Save a Deck to a file  	  	  
 
@@ -159,4 +162,4 @@ class UserInterface(TtyColors):
         """
         fileName = input("Please enter a filename: ")
 
-        raise NotImplementedError("TODO: Save a Deck to a file")  	  	  
+        raise NotImplementedError("TODO: Save a Deck to a file")

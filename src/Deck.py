@@ -32,7 +32,7 @@ class Deck():
 
         rand_num_set = RandNumberSet(nCardSize, nMaxNum)
         for i in range(nNumCards):
-            card = Card(nCardSize, rand_num_set[i])
+            card = Card(i, rand_num_set, nCardSize)
             self.__m_cards.append(card)
 
     def __len__(self):

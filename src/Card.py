@@ -25,11 +25,11 @@ import random
 class Card():
     COLUMN_NAMES = list("BINGOLARDYPEZMUX")
 
-    def __init__(self, nId, randNumSet):
+    def __init__(self, nId, randNumSet, nCardSize):
         self.id = nId
         self.numbers = []
-        for i, col in enumerate(self.COLUMN_NAMES):
-            col_nums = random.sample(range(randNumSet[i]), 5)
+        for i in range(nCardSize):
+            col_nums = randNumSet[i]
             self.numbers.append(col_nums)
 
     def getID(self):
@@ -41,9 +41,9 @@ class Card():
     def __len__(self):
         len(self.numbers)
 
-    def __str__(self, nID):
+    def __str__(self, nID, nCardSize):
         # Get the size of the card
-        size = len(self)
+        size = nCardSize
 
         # Create the header row with column names
         header = "Card #{}\n  ".format(nID)
