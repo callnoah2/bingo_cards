@@ -121,7 +121,7 @@ class UserInterface(TtyColors):
         menu += MenuOption("D", "Display the whole deck to the screen")
         menu += MenuOption("S", "Shuffle the deck")
         menu += MenuOption("X", "Return to main menu")
-        command = self.__getStr(menu.prompt(), ["p", "d", "s", "x"])
+        command = str(menu.prompt())
         if command == "p":
             self.__printCard(nNumCards, nCardSize)
         elif command == "d":
@@ -150,7 +150,7 @@ class UserInterface(TtyColors):
         #     return
 
 
-        ID = self.__getInt(input("Card ID: "), 1, nNumCards)
+        ID = int(input("Card ID: "))
         # Print the card
         print(Card.__str__(Card, ID, nCardSize))
 

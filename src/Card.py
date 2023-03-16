@@ -59,6 +59,7 @@ class Card():
         for row in range(size):
             row_str = "|"
             for col in range(size):
+                print(self.numberAt(row, col))
                 value = self.numberAt(row, col)
                 if value == -1:
                     value_str = "FREE!"
