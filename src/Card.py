@@ -30,6 +30,11 @@ class Card():
             col_nums = randNumSet[i]
             self.numbers.append(col_nums)
 
+        # If the card size is odd, set the center value to -1
+        if nCardSize % 2 == 1:
+            center_index = nCardSize // 2
+            self.numbers[center_index][center_index] = -1
+
     def getID(self):
         return self.id
 
