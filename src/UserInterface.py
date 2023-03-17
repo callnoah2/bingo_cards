@@ -24,8 +24,6 @@ from Deck import Deck
 from Menu import Menu
 from MenuOption import MenuOption
 from TtyColors import TtyColors
-from Card import Card
-
 
 class UserInterface(TtyColors):
     """  	  	  
@@ -116,20 +114,21 @@ class UserInterface(TtyColors):
 
         Present the deck menu to user until a valid selection is chosen
         """
-        menu = Menu("Deck")
-        menu += MenuOption("P", "Print a card to the screen")
-        menu += MenuOption("D", "Display the whole deck to the screen")
-        menu += MenuOption("S", "Shuffle the deck")
-        menu += MenuOption("X", "Return to main menu")
-        command = str(menu.prompt())
-        if command == "p":
-            self.__printCard(nNumCards, nCardSize)
-        elif command == "d":
-            self.__printDeck()
-        elif command == "s":
-            self.__saveDeck()
-        elif command == "x":
-            return
+        while True:
+            menu = Menu("Deck")
+            menu += MenuOption("P", "Print a card to the screen")
+            menu += MenuOption("D", "Display the whole deck to the screen")
+            menu += MenuOption("S", "Shuffle the deck")
+            menu += MenuOption("X", "Return to main menu")
+            command = str(menu.prompt())
+            if command == "p":
+                self.__printCard(nNumCards, nCardSize)
+            elif command == "d":
+                self.__printDeck()
+            elif command == "s":
+                self.__saveDeck()
+            elif command == "x":
+                break
 
     def __printDeck(self):
         """
