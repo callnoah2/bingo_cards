@@ -90,7 +90,8 @@ class UserInterface(TtyColors):
         nMaxNum = self.__getInt(f"Please Enter the max Bingo number(min: {minNum} - max: {maxNum}): ", minNum, maxNum)
 
         # Prompt for the number of cards in the deck
-        nNumCards = self.__getInt("Please enter the number of Cards to be created: ", 1, float("inf"))
+        maxnumCards = 8192
+        nNumCards = self.__getInt(f"Please enter the number of Cards to be created (max: {maxnumCards}: ", 1, maxnumCards)
 
         # Create a new Deck object with the user input values
         rand_num_set = RandNumberSet(nCardSize, nMaxNum)
