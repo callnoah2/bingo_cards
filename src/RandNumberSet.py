@@ -97,17 +97,9 @@ class RandNumberSet:
         return numbers_in_range[:self.__m_nSize]
 
     def shuffle(self):
-        """
-        Shuffles the internal list of numbers and returns a list of shuffled numbers.
-
-        :return: A list of shuffled numbers.
-        """
-        shuffled_numbers = list(range(1, self.__m_nMax + 1))
-        random.shuffle(shuffled_numbers)
-        num_missing = len(shuffled_numbers) % self.__m_nSize
-        if num_missing != 0:
-            shuffled_numbers += shuffled_numbers[:self.__m_nSize - num_missing]
-        return shuffled_numbers
+        random.shuffle(list(range(1, self.__m_nMax + 1)))
+        self.current_row = 0
+        self.__m_nRowPos = 0
     def getNextRow(self):
         """
         Return the next row of Bingo numbers, or None if the RandNumberSet
@@ -117,7 +109,9 @@ class RandNumberSet:
         """
         if self.__m_nRowPos >= self.__m_nSize:
             return None
-        row = self.__m_arrSegments[self.__m_nRowPos]
+        row = []
+        for segment in self.__m_arrSegments:
+            row += segment[self.__m_nRowPos:self.__m_nRowPos + 1]
         self.__m_nRowPos += 1
         return row
 
@@ -138,14 +132,7 @@ class RandNumberSet:
         return '\n'.join(strs)
 
     def __len__(self):
-        """
-        This dunder makes `len()` work on RandNumberSets
-
-        The length of a RandNumberSet is equal to the number of segments
-        it contains; in other words, len(RandNumberSet) == card size.
-        """
-        # Return the total number of unique numbers in the RandNumberSet
-        return self.__m_nSize * len(self.__m_arrSegments[0]) * len(self.__m_arrSegments)
+        return self.__m_nSize
 
     def __getitem__(self, n):
         """

@@ -91,7 +91,7 @@ class UserInterface(TtyColors):
 
         # Prompt for the number of cards in the deck
         maxnumCards = 8192
-        nNumCards = self.__getInt(f"Please enter the number of Cards to be created (max: {maxnumCards}: ", 1, maxnumCards)
+        nNumCards = self.__getInt(f"Please enter the number of Cards to be created (max: {maxnumCards}): ", 1, maxnumCards)
 
         # Create a new Deck object with the user input values
         rand_num_set = RandNumberSet(nCardSize, nMaxNum)
