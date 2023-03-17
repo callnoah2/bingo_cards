@@ -333,6 +333,8 @@ I am getting a new error when I try to print the card, I have seen a few differe
 I also have to input things twice for some reason. I think it is because I am validating the users responce two times.
 
 
+I have another problem that all the cards that are made are duplicates of eachother. I don't know what is causing the bug.
+
 ## Phase 3: Testing and Debugging (tag name `tested`)
 *(30% of your effort)*
 
