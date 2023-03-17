@@ -22,7 +22,7 @@
 
 import random
 
-class RandNumberSet():
+class RandNumberSet:
     MIN_SIZE = 3
     MAX_SIZE = 16
 
@@ -62,26 +62,52 @@ class RandNumberSet():
             low = high
 
     def get_column(self, col_index):
-        # Shuffle the list of numbers
-        segment_numbers = [row[col_index] for row in self.__m_arrSegments]
-        random.shuffle(segment_numbers)
+        # Calculate the range of numbers that should be included in this column
+        range_start = (col_index * self.__m_nMax) // self.__m_nSize + 1
+        range_end = ((col_index + 1) * self.__m_nMax) // self.__m_nSize
+
+        # Get all the numbers within the range
+        numbers_in_range = []
+        for segment in self.__m_arrSegments:
+            for num in segment:
+                if range_start <= num <= range_end:
+                    numbers_in_range.append(num)
+
+        # Shuffle the list of numbers within the range
+        random.shuffle(numbers_in_range)
 
         # Remove any numbers that have already been used in previous columns
         for i in range(col_index):
-            used_numbers = [row[i] for row in self.__m_arrSegments[:self.__m_nRowPos]]
-            segment_numbers = list(set(segment_numbers) - set(used_numbers))
+            used_numbers = [card[i] for card in self.__m_arrSegments]
+            numbers_in_range = list(set(numbers_in_range) - set(used_numbers))
 
-        # Take the first n numbers as the column values
-        return segment_numbers[:self.__m_nMax // self.__m_nSize]
+        # Check if the list has at least self.__m_nSize numbers
+        if len(numbers_in_range) < self.__m_nSize:
+            # If the list has less than self.__m_nSize numbers, we need to add more numbers to it
+            # Calculate how many more numbers we need to add
+            num_missing = self.__m_nSize - len(numbers_in_range)
+            # Get a list of all the numbers within the range that haven't been used yet
+            unused_numbers = list(set(range(range_start, range_end)) - set(numbers_in_range))
+            # Shuffle the list of unused numbers
+            random.shuffle(unused_numbers)
+            # Add the required number of unused numbers to the list
+            numbers_in_range += unused_numbers[:num_missing]
+
+        # Take the first self.__m_nSize numbers within the range as the column values
+        return numbers_in_range[:self.__m_nSize]
+
     def shuffle(self):
         """
-        Shuffle each segment and reset the current row position so that
-        getNextRow() will start from the top again.
-        """
-        for seg in self.__m_arrSegments:
-            random.shuffle(seg)
-        self.__m_nRowPos = 0
+        Shuffles the internal list of numbers and returns a list of shuffled numbers.
 
+        :return: A list of shuffled numbers.
+        """
+        shuffled_numbers = list(range(1, self.__m_nMax + 1))
+        random.shuffle(shuffled_numbers)
+        num_missing = len(shuffled_numbers) % self.__m_nSize
+        if num_missing != 0:
+            shuffled_numbers += shuffled_numbers[:self.__m_nSize - num_missing]
+        return shuffled_numbers
     def getNextRow(self):
         """
         Return the next row of Bingo numbers, or None if the RandNumberSet

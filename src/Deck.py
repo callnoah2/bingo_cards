@@ -32,7 +32,6 @@ class Deck():
 
         for i in range(nNumCards):
             card = Card(i, rand_num_set, nCardSize)
-            print(f"Adding card {i} to deck")
             self.__m_cards.append(card)
 
     def __len__(self):

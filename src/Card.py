@@ -24,11 +24,12 @@ class Card():
     COLUMN_NAMES = list("BINGOLARDYPEZMUX")
 
     def __init__(self, nId, randNumSet, nCardSize):
-        print(f"Creating card {nId}")
         self.id = nId
         self.numbers = []
         for i in range(nCardSize):
             col_nums = randNumSet.get_column(i)
+            if len(col_nums) != nCardSize:
+                raise ValueError("Invalid number set: column does not have the correct size.")
             self.numbers.append(col_nums)
 
         # If the card size is odd, set the center value to -1

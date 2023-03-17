@@ -125,7 +125,7 @@ class UserInterface(TtyColors):
             menu = Menu("Deck")
             menu += MenuOption("P", "Print a card to the screen")
             menu += MenuOption("D", "Display the whole deck to the screen")
-            menu += MenuOption("S", "Shuffle the deck")
+            menu += MenuOption("S", "Save the deck")
             menu += MenuOption("X", "Return to main menu")
             command = str(menu.prompt())
             if command == "p":
@@ -163,11 +163,17 @@ class UserInterface(TtyColors):
         print(card)
 
     def __saveDeck(self):
-        """  	  	  
-        Return None: Save a Deck to a file  	  	  
-
-        Prompt user for the name of file to write the entire Deck into  	  	  
-        """
-        fileName = input("Please enter a filename: ")
-
-        raise NotImplementedError("TODO: Save a Deck to a file")
+        while True:
+            filename = input("Enter the filename to save the deck: ")
+            if not filename:
+                print("Invalid filename!")
+                continue
+            try:
+                with open(filename, "w") as file:
+                    for card in self.__m_deck:
+                        file.write(str(card))
+                        file.write("\n\n")
+                print(f"Deck saved to {filename}!")
+                return
+            except OSError:
+                print("Error saving deck!")

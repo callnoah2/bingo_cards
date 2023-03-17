@@ -326,14 +326,29 @@ Deliver:
 *   [ ] Tag the last commit in this phase `implemented`
 
 ### Problems: 
+
 I am getting an index error when I am trying to add the numbers to the card. I cannot figure it out.
 * The issue was caused beacuse I was iterating with the wrong variable.
 I am getting a new error when I try to print the card, I have seen a few different error messages as I have made changes, Nothing has worked so far.
-
+* this was because the card was not being called correctly and the algorithm to print the card was wrong.
 I also have to input things twice for some reason. I think it is because I am validating the users responce two times.
-
-
+I was able to fix the issue of entering inputs twice by only using the menu option to check the inputs. This will be tested later in the testing phase.
 I have another problem that all the cards that are made are duplicates of eachother. I don't know what is causing the bug.
+*The issue where all cards created were duplicates of eachother were caused because numbers were only generated once.
+
+
+## Notable events
+
+
+I was able to orginize the card to have all columns have the correct values by adding an equation to give the possible values for the column, then shuffling them and choosing random 
+numbers from the list. The list also checks to make sure that the numbers haven't already been used.
+
+I was having issues where it wouldn't take enough nubers from the values and I would not have enough values to create a card, this was fixed by adding a function to make sure I end up 
+with the correct number of numbers.
+
+I also was able to make all odd numbered cards have a free space in the middle by adding a function in the card Class to check if the card is even or odd then replacing the middle number 
+if it is odd with a -1.
+
 
 ## Phase 3: Testing and Debugging (tag name `tested`)
 *(30% of your effort)*
