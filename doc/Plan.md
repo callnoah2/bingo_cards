@@ -361,6 +361,29 @@ Deliver:
     *   Write your test cases in plain language such that a non-coder could run them and replicate your experience.
 *   [ ] Tag the last commit in this phase `tested`
 
+## tests
+
+# Giving the menus bad input:
+When The main menu is given bad input, it does what it should and prints the menu agian after telling the User invalid input.
+However; Capital C and 'X' do not work, so that must be fixed
+
+when the deck menu is given a capital option from the menu, it also does not work.
+This means that my __getStr() method is not working how it should.
+When it is given an invalid option, it does what it should.
+
+I fixed the issue where the menu only accepted lowercase options by saying if command in ["lower", "Upper"]:
+this is not my first choice of what to do but all methods of validating and accepting input all used .lower() and it didnt seem to be working.
+
+#Giving Promps for specifications bad input:
+When the prompts are given bad input, they print the prompt again after telling the user invalid input.
+except for the number of cards, I was able to create 10000 cards.
+
+
+#Printing cards:
+Cards print as they should, ranges are correct, there are no duplicate numbers on any cards, and the cards are not duplicates of eachother.
+Printing the deck also works properly.
+
+saving the deck also works.
 
 ## Phase 4: Deployment (tag name `deployed`)
 *(5% of your effort)*

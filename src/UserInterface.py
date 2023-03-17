@@ -38,13 +38,13 @@ class UserInterface(TtyColors):
     def __init__(self):
         self.__m_deck = None
 
-
     def __getStr(self, prompt, valid_inputs):
         """
         Return a string input from the user that is contained in valid_inputs, prompted by string prompt.
         """
+        valid_inputs = [x.lower() for x in valid_inputs]  # convert valid_inputs to lowercase
         while True:
-            response = input(prompt).strip().lower()
+            response = input(prompt).lower()
             if response in valid_inputs:
                 return response
             print(f"Invalid input! Please enter one of the following: {', '.join(valid_inputs)}")
@@ -62,9 +62,9 @@ class UserInterface(TtyColors):
             menu += MenuOption("X", "Exit the program")
             # command = self.__getStr(menu.prompt(), ["c", "x"])
             command = str(menu.prompt())
-            if command == "c":
+            if command in ["c","C"]:
                 self.__createDeck()
-            elif command == "x":
+            elif command in ["x", "X"]:
                 break
 
 
@@ -86,7 +86,7 @@ class UserInterface(TtyColors):
 
         # Prompt for the maximum Bingo number to use on each card
         minNum = 2 * nCardSize ** 2
-        maxNum = (3.9 * nCardSize ** 2) // 1
+        maxNum = int(3.9 * nCardSize ** 2)
         nMaxNum = self.__getInt(f"Please Enter the max Bingo number(min: {minNum} - max: {maxNum}): ", minNum, maxNum)
 
         # Prompt for the number of cards in the deck
@@ -127,14 +127,14 @@ class UserInterface(TtyColors):
             menu += MenuOption("D", "Display the whole deck to the screen")
             menu += MenuOption("S", "Save the deck")
             menu += MenuOption("X", "Return to main menu")
-            command = str(menu.prompt())
-            if command == "p":
+            command = str(menu.prompt().lower())
+            if command in ["p", "P"]:
                 self.__printCard(nNumCards, nCardSize)
-            elif command == "d":
+            elif command in ["d", "D"]:
                 self.__printDeck()
-            elif command == "s":
+            elif command in ["s", "S"]:
                 self.__saveDeck()
-            elif command == "x":
+            elif command in ["x", "X"]:
                 break
 
     def __printDeck(self):
