@@ -27,20 +27,6 @@ class RandNumberSet():
     MAX_SIZE = 16
 
     def __init__(self, nSize, nMax):
-        """
-        Create a RandNumberSet
-
-        'nSize': a parameter restricted to be in the range [3..16]
-        'nMax': a parameter restricted to be no less than `nSize*nSize`
-
-        Numbers are kept in separate segments so that the numbers within
-        columns on the resulting Bingo! card increase from left to right.
-
-        Within a column numbers are unordered.
-
-        A newly initialized RandNumberSet may present its numbers in
-        order.  Use .shuffle() to mix it up.
-        """
         self.__m_nRowPos = 0
 
         # __m_nSize must be between [MIN_SIZE..MAX_SIZE]
@@ -63,16 +49,30 @@ class RandNumberSet():
             high = low + segmentSize
             if segment <= remainder:
                 high += 1
-            segment_numbers = set(range(low, high + 1))
+            segment_numbers = set(range(low, high))
             row = []
             while len(row) < self.__m_nSize:
-                num = random.randint(low, high)
+                num = random.randint(low, high - 1)
                 if num in segment_numbers:
                     row.append(num)
                     segment_numbers.remove(num)
+                if not segment_numbers:
+                    break
             self.__m_arrSegments.append(row)
             low = high
 
+    def get_column(self, col_index):
+        # Shuffle the list of numbers
+        segment_numbers = [row[col_index] for row in self.__m_arrSegments]
+        random.shuffle(segment_numbers)
+
+        # Remove any numbers that have already been used in previous columns
+        for i in range(col_index):
+            used_numbers = [row[i] for row in self.__m_arrSegments[:self.__m_nRowPos]]
+            segment_numbers = list(set(segment_numbers) - set(used_numbers))
+
+        # Take the first n numbers as the column values
+        return segment_numbers[:self.__m_nMax // self.__m_nSize]
     def shuffle(self):
         """
         Shuffle each segment and reset the current row position so that
@@ -100,6 +100,7 @@ class RandNumberSet():
         Accessor to private member __m_arrSegments
         """
         return self.__m_arrSegments
+
 
     def __str__(self):
         """

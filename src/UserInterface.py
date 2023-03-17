@@ -24,6 +24,7 @@ from Deck import Deck
 from Menu import Menu
 from MenuOption import MenuOption
 from TtyColors import TtyColors
+from RandNumberSet import RandNumberSet
 
 class UserInterface(TtyColors):
     """  	  	  
@@ -92,7 +93,13 @@ class UserInterface(TtyColors):
         nNumCards = self.__getInt("Please enter the number of Cards to be created: ", 1, float("inf"))
 
         # Create a new Deck object with the user input values
-        self.__m_deck = Deck(nCardSize, nNumCards, nMaxNum)
+        rand_num_set = RandNumberSet(nCardSize, nMaxNum)
+        deck = Deck(nCardSize, nNumCards, nMaxNum, rand_num_set)
+
+        # Set the deck attribute of the UserInterface object to the newly created deck
+        self.__m_deck = deck
+
+        # Present the deck menu to the user
         self.__deckMenu(nNumCards, nCardSize)
 
     def __getInt(self, prompt, lo, hi):

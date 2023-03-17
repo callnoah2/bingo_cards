@@ -24,15 +24,15 @@ from Card import Card
 from RandNumberSet import RandNumberSet
 
 class Deck():
-    def __init__(self, nCardSize, nNumCards, nMaxNum):
+    def __init__(self, nCardSize, nNumCards, nMaxNum, rand_num_set):
         self.__m_cards = []
         self.__m_size = nCardSize
         self.__m_max_num = nNumCards
         self.__m_num_cards = nMaxNum
 
-        rand_num_set = RandNumberSet(nCardSize, nMaxNum)
         for i in range(nNumCards):
             card = Card(i, rand_num_set, nCardSize)
+            print(f"Adding card {i} to deck")
             self.__m_cards.append(card)
 
     def __len__(self):
