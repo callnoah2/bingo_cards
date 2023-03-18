@@ -20,8 +20,7 @@
 #       or product names of the Licensor, except as required for  	  	  
 #       reasonable and customary use of the source files.  	  	  
 
-from Card import Card  	  	  
-from RandNumberSet import RandNumberSet
+from Card import Card
 
 class Deck():
     def __init__(self, nCardSize, nNumCards, nMaxNum, rand_num_set):
