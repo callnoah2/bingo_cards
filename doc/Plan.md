@@ -425,3 +425,20 @@ Deliver:
         *   ...to the next version of Python?
 *   [ ] Make one final commit and push your **completed** Software Development Plan to GitLab.
 *   [ ] Respond to the **Assignment Reflection Survey** on Canvas.
+
+Parts of code that are hard to understand: In the RandNumberSet class, get_column is hard to understand, I added 
+comments to it to attempt to help.
+I know how all parts of the code work besides get int and get str from the UserInterface, I don't know how it 
+would be used when I am already validating input in the menuOption
+I think that it would take me a full day to find a big in the code beacuse I think that it could have been 
+organized better.
+
+My documents shoiuld make sense to everyone because it was written to be human friendly. It will also make sense 
+to me in 6 months
+
+I think that adding a new feature would be doable because all the code is split up into classes well and doesn't 
+use too many variables.
+
+I believe that my code will work as time goes by, the program won't be affected by changes in hardwear and 
+softwear that I can think of.
+
