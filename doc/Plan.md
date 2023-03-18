@@ -385,6 +385,8 @@ Printing the deck also works properly.
 
 saving the deck also works.
 
+All tests in testing works as how they were intended.
+
 ## Phase 4: Deployment (tag name `deployed`)
 *(5% of your effort)*
 
